@@ -13,7 +13,7 @@ sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null | echo "'pi' app 
 git config --global --add safe.directory $APP_PATH
 
 cd $APP_PATH
-git pull
+sudo git pull
 
 # Add Docker's official GPG key:
 sudo apt install -y \

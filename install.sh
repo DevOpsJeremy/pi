@@ -32,11 +32,6 @@ sudo apt install -y \
 sudo groupadd docker || echo Docker group exists
 sudo usermod -aG docker $USER || echo "User '$USER' already part of Docker group"
 
-read -p "Exit? (Y/n) [N]: " answer
-if [[ "${answer,,}" == "y" ]]; then
-    exit
-fi
-
 sudo tee /etc/systemd/system/compose.service <<EOF
 [Unit]
 Description=Docker services
@@ -52,3 +47,5 @@ ExecStop=/usr/bin/docker compose down --remove-orphans
 Restart=on-failure
 RestartSec=10
 EOF
+
+sudo systemctl start compose

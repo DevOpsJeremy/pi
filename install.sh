@@ -6,6 +6,9 @@ sudo apt update
 sudo apt install -y \
     ca-certificates curl git
 
+git clone https://github.com/DevOpsJeremy/pi $HOME/.pi
+exit
+
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc

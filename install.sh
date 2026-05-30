@@ -10,7 +10,11 @@ sudo apt update
 sudo apt install -y git
 
 sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null | echo "'pi' app already installed"
-git config --global --add safe.directory $APP_PATH
+
+sudo tee $HOME/.gitconfig <<EOF
+[safe]
+        directory = $APP_PATH
+EOF
 
 cd $APP_PATH
 sudo git pull
@@ -43,7 +47,7 @@ sudo apt install -y \
 sudo groupadd docker || echo Docker group exists
 sudo usermod -aG docker $USER || echo "User '$USER' already part of Docker group"
 
-sudo mkdir -p $HOME/.{pihole,docker}
+sudo mkdir -p $HOME/.{pihole,docker} || echo Directories exist
 
 sudo tee $HOME/.docker/compose.yml <<EOF
 services:

@@ -4,6 +4,14 @@ set -xe
 
 REPO_URL=${REPO_URL:-https://github.com/DevOpsJeremy/pi}
 APP_PATH=${APP_PATH:-/opt/pi}
+INSTALL_PATH=${INSTALL_PATH:-$APP_PATH/install.sh}
+
+echo "0: $0"
+
+if [[ -f $INSTALL_PATH ]]; then
+    /bin/bash $INSTALL_PATH
+    exit
+fi
 
 sudo apt update
 sudo apt install -y \

@@ -4,23 +4,27 @@ set -xe
 
 REPO_URL=${REPO_URL:-https://github.com/DevOpsJeremy/pi}
 APP_PATH=${APP_PATH:-/opt/pi}
-INSTALL_PATH=${INSTALL_PATH:-$APP_PATH/install.sh}
+INSTALL_SCRIPT=${INSTALL_SCRIPT:-$APP_PATH/install.sh}
 
-echo "0: $0"
+sudo apt update
+sudo apt install -y git
 
-if [[ -f $INSTALL_PATH ]]; then
-    /bin/bash $INSTALL_PATH
+sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null
+
+if [[ "$?" == "0" ]]; then
+    cd $APP_PATH
+    /bin/bash $INSTALL_SCRIPT
     exit
 fi
 
-sudo apt update
-sudo apt install -y \
-    ca-certificates curl git
+cd $APP_PATH
+git pull
 
-sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH
 exit
 
 # Add Docker's official GPG key:
+sudo apt install -y \
+    ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc

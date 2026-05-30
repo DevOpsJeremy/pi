@@ -2,13 +2,14 @@
 
 set -xe
 
-APP_PATH=/opt/pi
+REPO_URL=${REPO_URL:-https://github.com/DevOpsJeremy/pi}
+APP_PATH=${APP_PATH:-/opt/pi}
 
 sudo apt update
 sudo apt install -y \
     ca-certificates curl git
 
-sudo git clone $GIT_EXTRA_ARGS https://github.com/DevOpsJeremy/pi $APP_PATH
+sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH
 exit
 
 # Add Docker's official GPG key:

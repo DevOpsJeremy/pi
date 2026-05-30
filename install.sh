@@ -11,13 +11,13 @@ sudo apt install -y git
 
 set +e
 sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null
-set -e
 
 if [[ "$?" == "0" ]]; then
-    cd $APP_PATH
     /bin/bash $INSTALL_SCRIPT
     exit
 fi
+
+set -e
 
 cd $APP_PATH
 git pull

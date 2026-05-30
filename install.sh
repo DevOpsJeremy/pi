@@ -2,11 +2,13 @@
 
 set -xe
 
+APP_PATH=/opt/pi
+
 sudo apt update
 sudo apt install -y \
     ca-certificates curl git
 
-git clone https://github.com/DevOpsJeremy/pi $HOME/.pi
+sudo git clone https://github.com/DevOpsJeremy/pi $APP_PATH
 exit
 
 # Add Docker's official GPG key:

@@ -76,4 +76,5 @@ Restart=on-failure
 RestartSec=10
 EOF
 
+sudo systemctl daemon-reload
 sudo systemctl restart compose

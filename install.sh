@@ -10,6 +10,7 @@ sudo apt update
 sudo apt install -y git
 
 sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null | echo "'pi' app already installed"
+git config --global --add safe.directory $APP_PATH
 
 cd $APP_PATH
 git pull

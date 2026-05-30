@@ -48,4 +48,4 @@ Restart=on-failure
 RestartSec=10
 EOF
 
-sudo systemctl start compose
+sudo systemctl restart compose

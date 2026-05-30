@@ -44,7 +44,7 @@ services:
       - 8.8.4.4
     volumes:
       - ${HOME}/.pihole:/etc/pihole
-    cap_add
+    cap_add:
       - SYS_NICE
     ports:
       - "53:53/tcp"

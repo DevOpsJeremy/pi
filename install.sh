@@ -9,15 +9,7 @@ INSTALL_SCRIPT=${INSTALL_SCRIPT:-$APP_PATH/install.sh}
 sudo apt update
 sudo apt install -y git
 
-set +e
-sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null
-
-if [[ "$?" == "0" ]]; then
-    /bin/bash $INSTALL_SCRIPT
-    exit
-fi
-
-set -e
+sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null | echo "'pi' app already installed"
 
 cd $APP_PATH
 git pull

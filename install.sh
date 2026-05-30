@@ -2,11 +2,13 @@
 
 set -xe
 
-# Add Docker's official GPG key:
+sudo add-apt-repository \
+    ppa:git-core/ppa
 sudo apt update
 sudo apt install -y \
-    ca-certificates curl
+    ca-certificates curl git
 
+# Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc

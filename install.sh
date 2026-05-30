@@ -14,8 +14,6 @@ sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null | echo "'pi' app 
 cd $APP_PATH
 git pull
 
-exit
-
 # Add Docker's official GPG key:
 sudo apt install -y \
     ca-certificates curl

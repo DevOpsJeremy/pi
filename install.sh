@@ -34,7 +34,7 @@ sudo usermod -aG docker $USER || echo "User '$USER' already part of Docker group
 
 sudo mkdir -p $HOME/.{pihole,docker}
 
-sudo tee $HOME/.docker/compose.yml <<<EOF
+sudo tee $HOME/.docker/compose.yml <<EOF
 services:
   pihole:
     container_name: pihole

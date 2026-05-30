@@ -9,7 +9,9 @@ INSTALL_SCRIPT=${INSTALL_SCRIPT:-$APP_PATH/install.sh}
 sudo apt update
 sudo apt install -y git
 
+set +e
 sudo git clone $GIT_EXTRA_ARGS $REPO_URL $APP_PATH 2>/dev/null
+set -e
 
 if [[ "$?" == "0" ]]; then
     cd $APP_PATH

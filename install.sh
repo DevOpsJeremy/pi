@@ -32,6 +32,33 @@ sudo apt install -y \
 sudo groupadd docker || echo Docker group exists
 sudo usermod -aG docker $USER || echo "User '$USER' already part of Docker group"
 
+sudo mkdir -p $HOME/.{pihole,docker}
+
+tee $HOME/.docker/compose.yml <<<EOF
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    volumes:
+      - ${HOME}/.pihole:/etc/pihole
+    cap_add
+      - SYS_NICE
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
+      - "8443:443/tcp"
+    environment:
+      TZ: 'America/Los_Angeles'
+      FTLCONF_webserver_api_password: 'changeme'
+      FTLCONF_dns_listeningMode: 'all'
+    restart: unless-stopped
+
+EOF
+
 sudo tee /etc/systemd/system/compose.service <<EOF
 [Unit]
 Description=Docker services
@@ -41,7 +68,8 @@ After=network-online.target
 Type=simple
 User=${USER}
 Group=docker
-WorkingDirectory=${HOME}
+WorkingDirectory=${HOME}/.docker
+ExecCondition=/usr/bin/test -f compose.yml
 ExecStart=/usr/bin/docker compose up
 ExecStop=/usr/bin/docker compose down --remove-orphans
 Restart=on-failure
